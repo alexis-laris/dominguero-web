@@ -273,9 +273,6 @@ export default function Audience() {
                     <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/85 to-bg/20" />
                 </div>
 
-                <div className="absolute -top-10 right-6 sm:right-10 select-none pointer-events-none">
-                    <Star size={260} className="text-gold-light/10 sm:w-[320px] sm:h-[320px]" strokeWidth={1} fill="currentColor" />
-                </div>
 
                 <div className="relative z-10 flex items-center gap-4 px-8 sm:px-14 py-10 max-w-xl">
                     <Star size={28} className="text-gold shrink-0" strokeWidth={1.75} />
