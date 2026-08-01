@@ -38,17 +38,17 @@ export default function Hero() {
               className="mt-5 h-12 sm:h-14 lg:h-16 w-auto opacity-95 select-none"
             />
 
-            <p className="text-white/70 leading-relaxed mt-4 max-w-md">
+            <p className="font-Poppins font-light tracking-normal text-white/70 leading-relaxed mt-4 max-w-md text-base sm:text-md">
               Dominguero crea contenido que inspira, motiva y enseña a millones de personas a
               superarse y tomar el control de su vida. Habla de lo que realmente importa:{' '}
-              <span className="text-gold-light font-semibold">hábitos</span>,{' '}
-              <span className="text-gold-light font-semibold">finanzas</span>,{' '}
-              <span className="text-gold-light font-semibold">automoción</span>,{' '}
-              <span className="text-gold-light font-semibold">viajes</span> y{' '}
-              <span className="text-gold-light font-semibold">mentalidad</span>.
+              <span className="text-gold-light">hábitos</span>,{' '}
+              <span className="text-gold-light">finanzas</span>,{' '}
+              <span className="text-gold-light">automoción</span>,{' '}
+              <span className="text-gold-light">viajes</span> y{' '}
+              <span className="text-gold-light">mentalidad</span>.
             </p>
 
-            <a href="#sobre-mi" className="btn-gold mt-8">
+            <a href="#sobre-mi" className="btn-gold  tracking-wide mt-8">
               Conoce Más Sobre Él
               <ArrowRight size={16} />
             </a>

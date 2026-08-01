@@ -22,10 +22,12 @@ export default {
       fontFamily: {
         display: ['"Bebas Neue"', 'Oswald', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
         script: ['"Caveat"', 'cursive'],
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(90deg, #B8862A 0%, #E8C468 50%, #B8862A 100%)',
+        'gold-gradient':
+          'linear-gradient(90deg, #B8862A 0%, #E8C468 50%, #B8862A 100%)',
       },
     },
   },

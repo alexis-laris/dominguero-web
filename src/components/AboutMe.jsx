@@ -28,23 +28,23 @@ export default function AboutMe() {
     <section id="sobre-mi" className="py-14 border-t border-line">
       <div className="flex items-center gap-3 mb-8">
         <span className="eyebrow-line" />
-        <h2 className="font-display text-3xl tracking-wide">SOBRE MÍ</h2>
+        <h2 className="font-display text-3xl tracking-wide">SOBRE DOMINGUERO</h2>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-10 lg:gap-8 items-start">
 
         <div className="w-full lg:w-[320px] shrink-0">
-          <p className="text-white/70 leading-relaxed">
+          <p className="text-white/70 leading-relaxed font-Poppins text-sm">
             Dominguero es creador de contenido, emprendedor e inversionista. Lleva más de 8 años
             creando contenido que entretiene, educa y motiva. Ha construido una comunidad leal y
             comprometida que busca mejorar su vida en todas las áreas.
           </p>
-          <p className="text-white/70 leading-relaxed mt-4">
+          <p className="text-white/70 leading-relaxed mt-4 font-Poppins text-sm">
             Su misión es simple: inspirar, aportar valor real y ayudar a las personas a tomar el
             control de su vida para que puedan alcanzar la libertad que merecen.
           </p>
 
-          <a href="#trayectoria" className="btn-gold mt-8">
+          <a href="#trayectoria" className="btn-gold mt-8 font-Poppins">
             Más Sobre Su Historia
             <ArrowRight size={16} />
           </a>
@@ -65,7 +65,7 @@ export default function AboutMe() {
               <h3 className="font-display text-2xl tracking-wide mb-2 leading-snug transition-colors duration-300 group-hover:text-white">
                 {title.toUpperCase()}
               </h3>
-              <p className="text-sm text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/80">
+              <p className=" text-white/60 leading-relaxed transition-colors duration-300 group-hover:text-white/80 font-Poppins text-sm">
                 {text}
               </p>
             </div>

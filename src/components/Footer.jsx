@@ -23,7 +23,7 @@ const SOCIALS = [
   {
     icon: FaTelegram,
     label: 'Síguelo en Telegram',
-    value: 'Pendiente',
+    value: '@Dominguero',
     href: '#', // ⚠️ pendiente: falta la URL de Telegram
   },
 ]
@@ -46,10 +46,10 @@ export default function Footer() {
               </span>
 
               <span>
-                <span className="block text-[11px] font-bold tracking-wide text-white/50 uppercase">
+                <span className="font-display block text-md  tracking-wide text-white/50 uppercase">
                   {label}
                 </span>
-                <span className="block text-sm font-semibold text-white">
+                <span className="font-display tracking-wide block text-lg  text-white">
                   {value}
                 </span>
               </span>
@@ -67,10 +67,10 @@ export default function Footer() {
             </span>
 
             <span>
-              <span className="block text-[11px] font-bold tracking-wide text-white/50 uppercase">
+              <span className="font-display tracking-wide block text-md text-white/50 uppercase">
                 Contacto Comercial
               </span>
-              <span className="block text-sm font-semibold text-white">
+              <span className="font-display tracking-wide block text-lg text-white">
                 marketing@dominguero.com
               </span>
             </span>

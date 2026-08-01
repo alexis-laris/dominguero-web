@@ -15,7 +15,7 @@ export default function Header() {
   const [activeId, setActiveId] = useState('inicio')
 
   return (
-    <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-line">
+    <header className="sticky top-0 z-50 bg-bg/95 backdrop-blur border-b border-line font-Poppins">
       <div className="container-px max-w-[1400px] mx-auto flex items-center justify-between h-20">
         <a
           href="#inicio"
@@ -36,7 +36,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setActiveId(link.id)}
-                className={`relative py-2 text-sm font-semibold tracking-wide transition ${isActive ? 'text-gold' : 'text-white/80 hover:text-gold'
+                className={`relative py-2 text-sm tracking-wide transition ${isActive ? 'text-gold' : 'text-white/80 hover:text-gold'
                   }`}
               >
                 {link.label}
@@ -49,8 +49,8 @@ export default function Header() {
           })}
         </nav>
 
-        <a href="#contacto" onClick={() => setActiveId('contacto')} className="hidden lg:inline-flex btn-gold">
-          Trabaja Con Él
+        <a href="#contacto" onClick={() => setActiveId('contacto')} className="hidden lg:inline-flex btn-gold font-Poppins">
+          Trabaja Con Dominguero
         </a>
 
         <button
@@ -86,7 +86,7 @@ export default function Header() {
                 setIsMenuOpen(false)
               }}
               style={{ transitionDelay: isMenuOpen ? `${i * 40}ms` : '0ms' }}
-              className={`py-3 text-sm font-semibold tracking-wide transition-all duration-300 border-b border-line/60 last:border-0 ${activeId === link.id ? 'text-gold' : 'text-white/80 hover:text-gold'
+              className={`py-3 text-sm tracking-wide transition-all duration-300 border-b border-line/60 last:border-0 ${activeId === link.id ? 'text-gold' : 'text-white/80 hover:text-gold'
                 } ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}`}
             >
               {link.label}
@@ -102,7 +102,7 @@ export default function Header() {
             className={`btn-gold mt-4 justify-center transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
               }`}
           >
-            Trabaja Con Él
+            Trabaja Con Dominguero
           </a>
         </div>
       </nav>

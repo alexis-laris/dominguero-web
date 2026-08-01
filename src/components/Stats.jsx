@@ -21,15 +21,19 @@ export default function Stats({ layout = 'sidebar', className = '' }) {
               <Icon size={20} />
             </span>
             <div>
-              <p className="font-display text-3xl leading-none text-gold-light tracking-wide transition-colors duration-300 group-hover:text-white">{value}</p>
-              <p className="text-xs font-semibold tracking-wide text-white/60 mt-1 transition-colors duration-300 group-hover:text-white/80">{label}</p>
+              <p className="font-display text-2xl leading-none text-gold-light tracking-wide transition-colors duration-300 group-hover:text-white">
+                {value}
+              </p>
+              <p className="font-Poppins text-xs tracking-wider text-white/60 mt-1.5 transition-colors duration-300 group-hover:text-white/80">
+                {label.toUpperCase()}
+              </p>
             </div>
           </div>
         ))}
       </div>
 
       {!isRow && (
-        <a href="#resultados" className="btn-gold w-full justify-center mt-4">
+        <a href="#resultados" className="btn-gold tracking-wide w-full justify-center mt-4 font-Poppins">
           Ver Estadísticas Completas
           <ArrowRight size={16} />
         </a>

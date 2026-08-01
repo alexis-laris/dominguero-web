@@ -1,4 +1,4 @@
-import { Youtube, TrendingUp, Users, Globe, Star, Crown, ChevronDown } from 'lucide-react'
+import { Youtube, TrendingUp, Users, Globe, Star, Crown } from 'lucide-react'
 
 const MILESTONES = [
   {
@@ -44,27 +44,49 @@ export default function Timeline() {
       </div>
 
       <div className="relative">
+
         <div className="hidden lg:block absolute top-6 left-0 right-0 h-px bg-gold-dark/50" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
-          {MILESTONES.map(({ year, icon: Icon, text }, i) => (
+        <div
+          className="
+            flex lg:grid lg:grid-cols-6 gap-4 lg:gap-4
+            overflow-x-auto lg:overflow-visible
+            pb-4 -mx-4 px-4 lg:mx-0 lg:px-0
+            [&::-webkit-scrollbar]:h-1.5
+            [&::-webkit-scrollbar-track]:bg-transparent
+            [&::-webkit-scrollbar-thumb]:bg-white/30
+            [&::-webkit-scrollbar-thumb]:rounded-full
+          "
+        >
+          {MILESTONES.map(({ year, icon: Icon, text }) => (
             <div
               key={year}
-              className="group relative flex flex-col items-center text-center p-4 rounded-lg border border-transparent transition-all duration-300 hover:border-gold/60 hover:-translate-y-1 hover:shadow-[0_8px_30px_-8px_rgba(229,179,76,0.35)] cursor-pointer"
+              className="
+                group relative flex flex-col items-center text-center p-4 rounded-lg
+                border border-transparent transition-all duration-300
+                hover:border-gold/60 hover:-translate-y-1
+                hover:shadow-[0_8px_30px_-8px_rgba(229,179,76,0.35)]
+                cursor-pointer shrink-0 w-[220px] lg:w-auto
+              "
             >
-              <span className="w-12 h-12 rounded-full border-2 border-gold bg-bg flex items-center justify-center text-gold z-10 transition-all duration-300 group-hover:border-gold-light group-hover:text-gold-light group-hover:scale-110 group-hover:shadow-[0_0_16px_-2px_rgba(229,179,76,0.6)]">
+              <span
+                className="
+                  w-12 h-12 rounded-full border-2 border-gold bg-bg
+                  flex items-center justify-center text-gold z-10
+                  transition-all duration-300
+                  group-hover:border-gold-light group-hover:text-gold-light
+                  group-hover:scale-110
+                  group-hover:shadow-[0_0_16px_-2px_rgba(229,179,76,0.6)]
+                "
+              >
                 <Icon size={20} />
               </span>
               <p className="font-display text-lg text-gold-light tracking-wide mt-3 transition-colors duration-300 group-hover:text-white">
                 {year}
               </p>
-              <p className="text-sm text-white/60 leading-relaxed mt-2 lg:max-w-[180px] transition-colors duration-300 group-hover:text-white/80">
+              <p className="font-Poppins text-sm text-white/60 leading-relaxed mt-2 lg:max-w-[180px] transition-colors duration-300 group-hover:text-white/80">
                 {text}
               </p>
-
-              {i < MILESTONES.length - 1 && (
-                <ChevronDown size={22} className="block lg:hidden text-gold-dark/60 mt-6" />
-              )}
             </div>
           ))}
         </div>

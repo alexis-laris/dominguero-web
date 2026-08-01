@@ -84,12 +84,12 @@ function ChartBlock({ title, children, className = '' }) {
 export default function Audience() {
     return (
         <div id="audiencia" className="scroll-mt-24">
-            <p className="text-gold text-xs font-bold tracking-[0.2em] mb-3">AUDIENCIA</p>
+            <p className="text-gold text-md font-bold tracking-[0.2em] mb-3 font-display">AUDIENCIA</p>
             <h2 className="font-display text-3xl sm:text-4xl tracking-wide leading-tight max-w-2xl">
                 COMUNIDAD REAL,<br />
                 <span className="text-gold-light">ORGÁNICA Y COMPROMETIDA.</span>
             </h2>
-            <p className="text-white/70 leading-relaxed mt-5 max-w-2xl">
+            <p className="text-white/70 leading-relaxed mt-5 max-w-2xl font-Poppins text-sm">
                 Más de 15 millones de personas siguen su contenido porque les aporta valor, entretenimiento
                 e inspiración para mejorar su vida. Estos son los datos de su audiencia en{' '}
                 <a href="#" className="text-gold-light underline underline-offset-2">todas las plataformas</a>.
@@ -110,7 +110,7 @@ export default function Audience() {
                         <span className="font-display text-4xl text-gold-light transition-colors duration-300 group-hover:text-white">
                             {value}
                         </span>
-                        <span className="text-xs text-white/60 tracking-wide uppercase mt-1 transition-colors duration-300 group-hover:text-white/80">
+                        <span className="font-display text-md text-white/60 tracking-wide uppercase mt-1 transition-colors duration-300 group-hover:text-white/80">
                             {label}
                         </span>
                     </div>
@@ -125,11 +125,11 @@ export default function Audience() {
                         <div className="flex flex-row sm:flex-col gap-8 w-full sm:w-auto justify-center sm:justify-start">
                             <div>
                                 <span className="font-display text-4xl sm:text-5xl text-gold-light block">81%</span>
-                                <span className="text-sm text-white/60 uppercase tracking-wide">Hombres</span>
+                                <span className="font-display text-md text-white/60 uppercase tracking-wide">Hombres</span>
                             </div>
                             <div>
                                 <span className="font-display text-4xl sm:text-5xl text-white/80 block">19%</span>
-                                <span className="text-sm text-white/60 uppercase tracking-wide">Mujeres</span>
+                                <span className="font-display text-md text-white/60 uppercase tracking-wide">Mujeres</span>
                             </div>
                         </div>
                     </div>
@@ -139,14 +139,14 @@ export default function Audience() {
                     <div className="space-y-4">
                         {AGE_RANGES.map(({ label, pct }) => (
                             <div key={label} className="flex items-center gap-4">
-                                <span className="text-sm text-white/60 w-12 shrink-0">{label}</span>
+                                <span className="font-display text-lg text-white/60 w-12 shrink-0">{label}</span>
                                 <div className="flex-1 h-2.5 rounded-full bg-white/10 overflow-hidden">
                                     <div
                                         className="h-full rounded-full bg-gradient-to-r from-gold to-gold-light"
                                         style={{ width: `${pct}%` }}
                                     />
                                 </div>
-                                <span className="text-sm text-white/70 w-10 text-right shrink-0">{pct}%</span>
+                                <span className="font-display text-lg text-white/70 w-10 text-right shrink-0">{pct}%</span>
                             </div>
                         ))}
                     </div>
@@ -162,14 +162,14 @@ export default function Audience() {
                             {COUNTRIES.map(({ label, pct, flag, color }) => (
                                 <li key={label} className="flex items-center gap-3">
                                     <img src={flag} alt={label} className="w-7 h-5 object-cover rounded-sm shrink-0" />
-                                    <span className="text-sm text-white/70 w-16 sm:w-20 shrink-0 truncate">{label}</span>
+                                    <span className="font-display text-lg text-white/70 w-16 sm:w-20 shrink-0 truncate">{label}</span>
                                     <div className="flex-1 min-w-0 h-2.5 rounded-full bg-white/10 overflow-hidden">
                                         <div
                                             className="h-full rounded-full"
                                             style={{ width: `${pct}%`, backgroundColor: color }}
                                         />
                                     </div>
-                                    <span className="text-sm text-white/90 font-semibold w-9 text-right shrink-0">{pct}%</span>
+                                    <span className="font-display text-lg text-white/90 font-semibold w-9 text-right shrink-0">{pct}%</span>
                                 </li>
                             ))}
                         </ul>
@@ -195,14 +195,14 @@ export default function Audience() {
                                 >
                                     <img src={icon} alt={name} className="w-7 h-7 object-contain" />
                                 </span>
-                                <span className="text-sm font-bold uppercase tracking-wide text-white/90 w-24 sm:w-28 shrink-0 transition-colors duration-300 group-hover:text-white">
+                                <span className="font-display text-lg font-bold uppercase tracking-wide text-white/90 w-24 sm:w-28 shrink-0 transition-colors duration-300 group-hover:text-white">
                                     {name}
                                 </span>
                                 <div className="flex-1 flex items-center justify-center gap-2">
                                     <span className="font-display text-3xl sm:text-4xl leading-none text-gold-light transition-colors duration-300 group-hover:text-[color:var(--brand)]">
                                         {value}
                                     </span>
-                                    <span className="text-xs text-white/50 uppercase tracking-wide transition-colors duration-300 group-hover:text-white/70">
+                                    <span className="font-display text-lg text-white/50 uppercase tracking-wide transition-colors duration-300 group-hover:text-white/70">
                                         {suffix}
                                     </span>
                                 </div>
@@ -283,7 +283,7 @@ export default function Audience() {
                         <h3 className="font-display text-xl sm:text-2xl tracking-wide leading-tight">
                             AUDIENCIA REAL, ORGÁNICA<br className="hidden sm:block" /> Y COMPROMETIDA.
                         </h3>
-                        <p className="text-white/70 leading-relaxed mt-3 text-sm sm:text-base">
+                        <p className="text-white/70 leading-relaxed mt-3 text-sm sm:text-sm font-Poppins">
                             Una comunidad que confía, se inspira y participa cada día en el contenido.
                         </p>
                     </div>
