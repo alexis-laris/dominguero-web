@@ -10,6 +10,8 @@ const NAV_LINKS = [
   { label: 'Contacto', href: '#contacto', id: 'contacto' },
 ]
 
+import telegram from '../assets/imgs/person/logo.png'
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeId, setActiveId] = useState('inicio')
@@ -22,9 +24,11 @@ export default function Header() {
           onClick={() => setActiveId('inicio')}
           className="flex items-center gap-2"
         >
-          <span className="w-9 h-9 rounded-sm border border-gold flex items-center justify-center font-display text-gold text-xl leading-none">
-            D
-          </span>
+          <img
+            src={telegram}
+            alt="Logo Dominguero"
+            className="w-10 h-10 object-cover"
+          />
           <span className="font-display text-2xl tracking-wide">DOMINGUERO</span>
         </a>
 
