@@ -17,8 +17,8 @@ const SOCIALS = [
   {
     icon: FaTiktok,
     label: 'Síguelo en TikTok',
-    value: '@domingueroficial',
-    href: 'https://www.tiktok.com/@domingueroficial?lang=es',
+    value: '@dominguero',
+    href: 'https://www.tiktok.com/@dominguero?lang=es',
   },
   {
     icon: FaTelegram,

@@ -27,7 +27,7 @@ export default function Header() {
           <img
             src={telegram}
             alt="Logo Dominguero"
-            className="w-10 h-10 object-cover"
+            className="w-14 h-14 object-cover"
           />
           <span className="font-display text-2xl tracking-wide">DOMINGUERO</span>
         </a>
