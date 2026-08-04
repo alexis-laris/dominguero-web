@@ -24,7 +24,7 @@ const SOCIALS = [
     icon: FaTelegram,
     label: 'Síguelo en Telegram',
     value: '@Dominguero',
-    href: '#', // ⚠️ pendiente: falta la URL de Telegram
+    href: 'https://t.me/+CkpQLMTPzBM1ZjBh',
   },
 ]
 

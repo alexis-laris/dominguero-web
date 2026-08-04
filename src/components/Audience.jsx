@@ -49,7 +49,7 @@ const SOCIALS = [
     { icon: instagram, name: 'Instagram', value: '2M+', suffix: 'Seguidores', color: '#E1306C', href: 'https://www.instagram.com/dominguero/?hl=es-la' },
     { icon: tiktok, name: 'TikTok', value: '3.5M+', suffix: 'Seguidores', color: '#25F4EE', href: 'https://www.tiktok.com/@domingueroficial?lang=es' },
     { icon: facebook, name: 'Facebook', value: '5M+', suffix: 'Seguidores', color: '#1877F2', href: 'https://www.facebook.com/Dominguero/?locale=es_LA' },
-    { icon: telegram, name: 'Telegram', value: '60K+', suffix: 'Suscriptores', color: '#29A9EA', href: '#' }, // ⚠️ pendiente: falta la URL de Telegram
+    { icon: telegram, name: 'Telegram', value: '60K+', suffix: 'Suscriptores', color: '#29A9EA', href: 'https://t.me/+CkpQLMTPzBM1ZjBh' },
 ]
 
 function Donut({ segments, size = 176, thickness = 26 }) {
@@ -91,8 +91,7 @@ export default function Audience() {
             </h2>
             <p className="text-white/70 leading-relaxed mt-5 max-w-2xl font-Poppins text-sm">
                 Más de 15 millones de personas siguen su contenido porque les aporta valor, entretenimiento
-                e inspiración para mejorar su vida. Estos son los datos de su audiencia en{' '}
-                <a href="#" className="text-gold-light underline underline-offset-2">todas las plataformas</a>.
+                e inspiración para mejorar su vida.
             </p>
 
 

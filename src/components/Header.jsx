@@ -72,8 +72,9 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Menú mobile: posicionado absolute para NO empujar el layout ni alterar la altura del header al abrir/cerrar */}
       <nav
-        className={`lg:hidden overflow-hidden border-t border-line bg-bg-soft transition-all duration-300 ease-out ${isMenuOpen ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0'
+        className={`lg:hidden absolute top-full left-0 right-0 overflow-hidden border-t border-line bg-bg-soft transition-all duration-300 ease-out ${isMenuOpen ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
           }`}
       >
         <div className="container-px max-w-[1400px] mx-auto flex flex-col py-4">

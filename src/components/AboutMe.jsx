@@ -25,7 +25,7 @@ const FEATURES = [
 
 export default function AboutMe() {
   return (
-    <section id="sobre-mi" className="py-14 border-t border-line">
+    <section id="sobre-mi" className="py-14 border-t border-line scroll-mt-20">
       <div className="flex items-center gap-3 mb-8">
         <span className="eyebrow-line" />
         <h2 className="font-display text-3xl tracking-wide">SOBRE DOMINGUERO</h2>
@@ -35,7 +35,7 @@ export default function AboutMe() {
 
         <div className="w-full lg:w-[320px] shrink-0">
           <p className="text-white/70 leading-relaxed font-Poppins text-sm">
-            Dominguero es creador de contenido, emprendedor e inversionista. Lleva más de 8 años
+            Dominguero es emprendedor, inversionista y creador de contenido. Lleva más de 10 años
             creando contenido que entretiene, educa y motiva. Ha construido una comunidad leal y
             comprometida que busca mejorar su vida en todas las áreas.
           </p>

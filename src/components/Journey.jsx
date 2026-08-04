@@ -93,10 +93,10 @@ export default function Journey() {
                         </h2>
 
                         <p className="text-white/70 leading-relaxed mt-6 font-Poppins text-sm">
-                            Juan Domingo Ruiz es creador de contenido, emprendedor e inversionista.
+                            Juan Domingo es emprendedor, inversionista y creador de contenido.
                         </p>
                         <p className="text-white/70 leading-relaxed mt-4 font-Poppins text-sm">
-                            Lleva más de 8 años creando contenido que entretiene, educa e inspira a millones de
+                            Lleva más de 10 años creando contenido que entretiene, educa e inspira a millones de
                             personas en todo el mundo.
                         </p>
                         <p className="text-white/70 leading-relaxed mt-4 font-Poppins text-sm">
@@ -152,8 +152,8 @@ export default function Journey() {
                         </h2>
 
                         <p className="text-white/70 leading-relaxed mt-6 max-w-xl font-Poppins text-sm">
-                            Se dedica a crear contenido de alto impacto que combina entretenimiento, educación y
-                            motivación.
+                            Es inversor y emprendedor, apasionado por los negocios y las nuevas oportunidades. A través de su contenido,
+                            combina entretenimiento, educación y motivación para inspirar a su comunidad.
                         </p>
                         <p className="text-white/70 leading-relaxed mt-4 max-w-xl font-Poppins text-sm">
                             Su objetivo es ayudar a las personas a mejorar su vida a través de información real,
