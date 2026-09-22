@@ -14,7 +14,6 @@
       content="Dominguero crea contenido que inspira, motiva y enseña a millones de personas a superarse y tomar el control de su vida."
     />
 
-   
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="DOMINGUERO" />
     <meta property="og:url" content="https://dominguero.com/" />
@@ -24,28 +23,20 @@
       content="Dominguero crea contenido que inspira, motiva y enseña a millones de personas a superarse y tomar el control de su vida."
     />
 
-    <meta
-      property="og:image"
-      content="https://dominguero.com/images/preview.jpg"
-    />
-
+    <meta property="og:image" content="https://dominguero.com/images/preview.jpg" />
     <meta property="og:image:secure_url" content="https://dominguero.com/images/preview.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="DOMINGUERO" />
 
-    
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="DOMINGUERO" />
     <meta
       name="twitter:description"
       content="Dominguero crea contenido que inspira, motiva y enseña a millones de personas a superarse y tomar el control de su vida."
     />
-    <meta
-      name="twitter:image"
-      content="https://dominguero.com/images/preview.jpg"
-    />
+    <meta name="twitter:image" content="https://dominguero.com/images/preview.jpg" />
     <meta name="twitter:image:alt" content="DOMINGUERO" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,7 +48,7 @@
     />
   </head>
 
-      <body>
+  <body>
     <div id="root"></div>
     <div id="google_translate_element" style="display:none"></div>
 
@@ -82,9 +73,13 @@
         };
       })();
 
-      // Traducción automática según el país de la IP
+      // ===== Configuración =====
       const IDIOMA_ORIGINAL = 'es';
-      const DIAS_VALIDEZ = 1; // Cuántos días se respeta la elección manual del usuario
+      const DIAS_VALIDEZ = 1;   // Cuántos días se respeta la elección manual del usuario
+      const DEBUG = false;      // Cámbialo a true para ver los mensajes en la consola
+
+      const log = (...args) => DEBUG && console.log(...args);
+      const warn = (...args) => DEBUG && console.warn(...args);
 
       const PAIS_A_IDIOMA = {
         // Inglés
@@ -129,6 +124,7 @@
         ET: 'am', SO: 'so'
       };
 
+      // ===== Funciones =====
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
           { pageLanguage: IDIOMA_ORIGINAL, autoDisplay: false },
@@ -147,8 +143,8 @@
         try { localStorage.removeItem('idiomaElegido'); } catch (e) {}
       }
 
-      // console.log('🌐 Idioma del navegador:', navigator.language);
-      // console.log('🍪 Cookie googtrans:', (document.cookie.match(/googtrans=[^;]*/) || ['(ninguna)'])[0]);
+      log('🌐 Idioma del navegador:', navigator.language);
+      log('🍪 Cookie googtrans:', (document.cookie.match(/googtrans=[^;]*/) || ['(ninguna)'])[0]);
 
       // Varias APIs por si alguna falla o está bloqueada
       const APIS_IP = [
@@ -164,12 +160,12 @@
             if (!r.ok) throw new Error('HTTP ' + r.status);
             const datos = api.leer(await r.json());
             if (datos.pais) {
-              console.log('📍 Fuente:', api.url);
+              log('📍 Fuente:', api.url);
               return datos;
             }
             throw new Error('respuesta sin país');
           } catch (err) {
-            console.warn('⚠️ Falló', api.url, '-', err.message);
+            warn('⚠️ Falló', api.url, '-', err.message);
           }
         }
         return null;
@@ -180,13 +176,13 @@
           document.cookie = `googtrans=/${IDIOMA_ORIGINAL}/${idioma}; path=/`;
           const s = document.createElement('script');
           s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-          s.onload = () => console.log('✅ Google Translate cargado, traduciendo a:', idioma);
+          s.onload = () => log('✅ Google Translate cargado, traduciendo a:', idioma);
           s.onerror = () => console.error('❌ No se pudo cargar Google Translate');
           document.body.appendChild(s);
         } else {
           borrarCookieTraduccion();
           idioma = IDIOMA_ORIGINAL;
-          // console.log('🧹 Página en idioma original');
+          log('🧹 Página en idioma original');
         }
         window.idiomaActual = idioma;
         window.dispatchEvent(new CustomEvent('idioma', { detail: idioma }));
@@ -202,12 +198,14 @@
         location.reload();
       };
 
+      // ===== Inicio =====
+
       // Para pruebas: tupagina.com/?reset-idioma
       if (new URLSearchParams(location.search).has('reset-idioma')) {
         borrarEleccion();
         borrarCookieTraduccion();
         history.replaceState(null, '', location.pathname + location.hash);
-        console.log('🔄 Idioma reiniciado, se detectará por IP');
+        log('🔄 Idioma reiniciado, se detectará por IP');
       }
 
       // ¿El usuario eligió idioma y sigue vigente?
@@ -222,16 +220,16 @@
       }
 
       if (elegido) {
-        // console.log('👤 Idioma elegido por el usuario:', elegido);
+        log('👤 Idioma elegido por el usuario:', elegido);
         aplicarIdioma(elegido);
       } else {
         obtenerPais().then(datos => {
           if (!datos) {
-            console.error('❌ Ninguna API de IP respondió');
+            warn('❌ Ninguna API de IP respondió');
             aplicarIdioma(IDIOMA_ORIGINAL);
             return;
           }
-          console.log('📍 IP:', datos.ip, '| País:', datos.pais);
+          log('📍 IP:', datos.ip, '| País:', datos.pais);
           aplicarIdioma(PAIS_A_IDIOMA[datos.pais]);
         });
       }
@@ -239,5 +237,4 @@
 
     <script type="module" src="/src/main.jsx"></script>
   </body>
-</html>
 </html>
