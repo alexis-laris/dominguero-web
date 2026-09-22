@@ -57,8 +57,187 @@
     />
   </head>
 
-  <body>
+      <body>
     <div id="root"></div>
+    <div id="google_translate_element" style="display:none"></div>
+
+    <style>
+      .goog-te-banner-frame, .skiptranslate, #goog-gt-tt { display: none !important; }
+      body { top: 0 !important; }
+      font { background: none !important; box-shadow: none !important; }
+    </style>
+
+    <script>
+      // Parche para que Google Translate no rompa React
+      (function () {
+        const removeChild = Node.prototype.removeChild;
+        Node.prototype.removeChild = function (child) {
+          if (child.parentNode !== this) return child;
+          return removeChild.apply(this, arguments);
+        };
+        const insertBefore = Node.prototype.insertBefore;
+        Node.prototype.insertBefore = function (nuevo, referencia) {
+          if (referencia && referencia.parentNode !== this) return nuevo;
+          return insertBefore.apply(this, arguments);
+        };
+      })();
+
+      // Traducción automática según el país de la IP
+      const IDIOMA_ORIGINAL = 'es';
+      const DIAS_VALIDEZ = 1; // Cuántos días se respeta la elección manual del usuario
+
+      const PAIS_A_IDIOMA = {
+        // Inglés
+        US: 'en', GB: 'en', CA: 'en', AU: 'en', NZ: 'en', IE: 'en', ZA: 'en',
+        NG: 'en', KE: 'en', GH: 'en', UG: 'en', TZ: 'en', ZM: 'en', ZW: 'en',
+        JM: 'en', TT: 'en', BS: 'en', BB: 'en', BZ: 'en', GY: 'en', SG: 'en',
+        PH: 'en', IN: 'en', PK: 'en', MT: 'en', BW: 'en', NA: 'en', LR: 'en',
+        SL: 'en', MW: 'en', RW: 'en', FJ: 'en', PG: 'en',
+
+        // Francés
+        FR: 'fr', BE: 'fr', LU: 'fr', MC: 'fr', SN: 'fr', CI: 'fr', CM: 'fr',
+        ML: 'fr', BF: 'fr', NE: 'fr', TD: 'fr', GN: 'fr', BJ: 'fr', TG: 'fr',
+        MG: 'fr', CD: 'fr', CG: 'fr', GA: 'fr', HT: 'fr', DJ: 'fr',
+
+        // Portugués
+        BR: 'pt', PT: 'pt', AO: 'pt', MZ: 'pt', CV: 'pt', GW: 'pt', ST: 'pt', TL: 'pt',
+
+        // Alemán, italiano, neerlandés
+        DE: 'de', AT: 'de', CH: 'de', LI: 'de',
+        IT: 'it', SM: 'it', VA: 'it',
+        NL: 'nl', SR: 'nl',
+
+        // Árabe
+        SA: 'ar', AE: 'ar', EG: 'ar', MA: 'ar', DZ: 'ar', TN: 'ar', LY: 'ar',
+        JO: 'ar', LB: 'ar', SY: 'ar', IQ: 'ar', KW: 'ar', QA: 'ar', BH: 'ar',
+        OM: 'ar', YE: 'ar', SD: 'ar', PS: 'ar', MR: 'ar',
+
+        // Europa del Este y resto de Europa
+        RU: 'ru', BY: 'ru', KZ: 'ru', KG: 'ru',
+        UA: 'uk', PL: 'pl', CZ: 'cs', SK: 'sk', HU: 'hu', RO: 'ro', MD: 'ro',
+        BG: 'bg', GR: 'el', CY: 'el', TR: 'tr', RS: 'sr', HR: 'hr', SI: 'sl',
+        BA: 'bs', MK: 'mk', AL: 'sq', XK: 'sq', SE: 'sv', NO: 'no', DK: 'da',
+        FI: 'fi', IS: 'is', EE: 'et', LV: 'lv', LT: 'lt', GE: 'ka', AM: 'hy',
+        AZ: 'az', UZ: 'uz',
+
+        // Asia y Medio Oriente
+        JP: 'ja', KR: 'ko', CN: 'zh-CN', TW: 'zh-TW', HK: 'zh-TW', MO: 'zh-TW',
+        VN: 'vi', TH: 'th', ID: 'id', MY: 'ms', KH: 'km', LA: 'lo', MM: 'my',
+        MN: 'mn', BD: 'bn', NP: 'ne', LK: 'si', IR: 'fa', AF: 'fa', IL: 'iw',
+
+        // África (otros idiomas)
+        ET: 'am', SO: 'so'
+      };
+
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: IDIOMA_ORIGINAL, autoDisplay: false },
+          'google_translate_element'
+        );
+      }
+
+      function borrarCookieTraduccion() {
+        const expira = 'expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = `googtrans=; path=/; ${expira}`;
+        document.cookie = `googtrans=; path=/; domain=${location.hostname}; ${expira}`;
+        document.cookie = `googtrans=; path=/; domain=.${location.hostname}; ${expira}`;
+      }
+
+      function borrarEleccion() {
+        try { localStorage.removeItem('idiomaElegido'); } catch (e) {}
+      }
+
+      // console.log('🌐 Idioma del navegador:', navigator.language);
+      // console.log('🍪 Cookie googtrans:', (document.cookie.match(/googtrans=[^;]*/) || ['(ninguna)'])[0]);
+
+      // Varias APIs por si alguna falla o está bloqueada
+      const APIS_IP = [
+        { url: 'https://ipwho.is/',       leer: d => ({ ip: d.ip, pais: d.country_code }) },
+        { url: 'https://api.country.is/', leer: d => ({ ip: d.ip, pais: d.country }) },
+        { url: 'https://ipapi.co/json/',  leer: d => ({ ip: d.ip, pais: d.country_code }) }
+      ];
+
+      async function obtenerPais() {
+        for (const api of APIS_IP) {
+          try {
+            const r = await fetch(api.url);
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            const datos = api.leer(await r.json());
+            if (datos.pais) {
+              console.log('📍 Fuente:', api.url);
+              return datos;
+            }
+            throw new Error('respuesta sin país');
+          } catch (err) {
+            console.warn('⚠️ Falló', api.url, '-', err.message);
+          }
+        }
+        return null;
+      }
+
+      function aplicarIdioma(idioma) {
+        if (idioma && idioma !== IDIOMA_ORIGINAL) {
+          document.cookie = `googtrans=/${IDIOMA_ORIGINAL}/${idioma}; path=/`;
+          const s = document.createElement('script');
+          s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          s.onload = () => console.log('✅ Google Translate cargado, traduciendo a:', idioma);
+          s.onerror = () => console.error('❌ No se pudo cargar Google Translate');
+          document.body.appendChild(s);
+        } else {
+          borrarCookieTraduccion();
+          idioma = IDIOMA_ORIGINAL;
+          // console.log('🧹 Página en idioma original');
+        }
+        window.idiomaActual = idioma;
+        window.dispatchEvent(new CustomEvent('idioma', { detail: idioma }));
+      }
+
+      // La llama el selector ES / EN del Header
+      window.cambiarIdioma = function (idioma) {
+        try {
+          localStorage.setItem('idiomaElegido', JSON.stringify({ idioma, fecha: Date.now() }));
+        } catch (e) {}
+        if (idioma === IDIOMA_ORIGINAL) borrarCookieTraduccion();
+        else document.cookie = `googtrans=/${IDIOMA_ORIGINAL}/${idioma}; path=/`;
+        location.reload();
+      };
+
+      // Para pruebas: tupagina.com/?reset-idioma
+      if (new URLSearchParams(location.search).has('reset-idioma')) {
+        borrarEleccion();
+        borrarCookieTraduccion();
+        history.replaceState(null, '', location.pathname + location.hash);
+        console.log('🔄 Idioma reiniciado, se detectará por IP');
+      }
+
+      // ¿El usuario eligió idioma y sigue vigente?
+      let elegido = null;
+      try {
+        const guardado = JSON.parse(localStorage.getItem('idiomaElegido'));
+        const vigente = guardado && Date.now() - guardado.fecha < DIAS_VALIDEZ * 24 * 60 * 60 * 1000;
+        if (vigente) elegido = guardado.idioma;
+        else borrarEleccion();
+      } catch (e) {
+        borrarEleccion(); // formato viejo o dato dañado
+      }
+
+      if (elegido) {
+        // console.log('👤 Idioma elegido por el usuario:', elegido);
+        aplicarIdioma(elegido);
+      } else {
+        obtenerPais().then(datos => {
+          if (!datos) {
+            console.error('❌ Ninguna API de IP respondió');
+            aplicarIdioma(IDIOMA_ORIGINAL);
+            return;
+          }
+          console.log('📍 IP:', datos.ip, '| País:', datos.pais);
+          aplicarIdioma(PAIS_A_IDIOMA[datos.pais]);
+        });
+      }
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
+</html>
 </html>
